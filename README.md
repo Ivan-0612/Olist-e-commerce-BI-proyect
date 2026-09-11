@@ -11,6 +11,7 @@ Lo interesante del proyecto es que toda la infraestructura está montada sobre *
 
 
 ## Arquitectura y Flujo de Datos
+```
 [Datos Brutos Olist]
 │
 ▼
@@ -26,6 +27,7 @@ Lo interesante del proyecto es que toda la infraestructura está montada sobre *
 │
 ▼
 [Power BI Report]        ──> Dashboard interactivo de 3 páginas 
+```
 
 ### Decisiones de Ingeniería y Rendimiento
 * **Direct Lake Mode:** Quería probar este modo en Fabric porque soluciona el eterno problema de tener que importar los datos a la memoria de Power BI. Al tirar directamente contra tablas Delta, el modelo escala de forma más eficiente.
