@@ -1,6 +1,6 @@
 # Olist E-Commerce Intelligence Dashboard (Microsoft Fabric & Direct Lake)
 
-![Project Cover](assets/cover.png)
+![Project Cover](assets/cover.png?v=2)
 
 ## Contexto del Proyecto
 Este proyecto nace de mi interés por montar un entorno analítico *end-to-end* que vaya un paso más allá del típico Power BI conectado a un Excel. Utilizando el dataset público de **Olist E-Commerce** (unos 100.000 pedidos reales en Brasil), he construido una solución de Business Intelligence orientada a tres áreas clave de negocio: toma de decisiones a nivel directivo (C-Level), rendimiento logístico y análisis del ecosistema de vendedores.
