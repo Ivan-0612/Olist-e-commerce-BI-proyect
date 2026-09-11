@@ -68,7 +68,7 @@ Diagnóstico de la cadena de suministro y su impacto en la experiencia de client
 * **Correlación de servicio:** Matriz de dispersión relacionando plazo medio de entrega frente a la valoración media de los clientes.
 * **Distribución de satisfacción**: Matriz que relaciona la valoración del cliente con el total de pedidos y el plazo medio de entrega.
 
-![Logística](assets/page2_logistics.png)
+![Logística](assets/page2_logistic.png)
 
 ---
 
