@@ -1,0 +1,11 @@
+// 1. Plazo Medio de Entrega
+[Average Delivery Days] = 
+AVERAGE(gold_fact_orders[delivery_days])
+
+// 2. Coste de Envío
+[Total Freight] = 
+SUM(gold_fact_orders[freight_amount])
+
+// 3. Impacto Logístico %
+[Freight Ratio %] = 
+DIVIDE([Total Freight], [Total Revenue], 0)

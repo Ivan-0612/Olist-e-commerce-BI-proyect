@@ -1,0 +1,7 @@
+// 1. Variedad de Catálogo
+[Catalog SKUs] = 
+DISTINCTCOUNT(gold_dim_products[product_id])
+
+// 2. Valoración Media
+[Average Review Score] = 
+AVERAGE(gold_fact_orders[review_score])

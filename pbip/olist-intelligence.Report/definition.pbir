@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json",
+  "version": "4.0",
+  "datasetReference": {
+    "byConnection": {
+      "connectionString": "Data Source=powerbi://api.powerbi.com/v1.0/myorg/lh_ecommerce_analytics;initial catalog=semantic_model;access mode=readonly;integrated security=ClaimsToken;semanticmodelid=ac8f4663-630d-4a81-9b04-b16ca3fea477"
+    }
+  }
+}

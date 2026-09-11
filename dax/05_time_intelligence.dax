@@ -1,0 +1,21 @@
+// 1. Ventas Año Ant. (PY)
+[Revenue PY] = 
+CALCULATE(
+    [Total Revenue],
+    SAMEPERIODLASTYEAR(gold_dim_date[date_key])
+)
+
+// 2. Ventas Acumuladas (YTD)
+[Revenue YTD] = 
+TOTALYTD([Total Revenue], gold_dim_date[date_key])
+
+// 3. Crecimiento YoY %
+[YoY Revenue Growth %] = 
+VAR _Current = [Total Revenue]
+VAR _Previous = [Revenue PY]
+RETURN
+IF(
+    NOT ISBLANK(_Current) && NOT ISBLANK(_Previous) && _Previous > 0,
+    DIVIDE(_Current - _Previous, _Previous),
+    BLANK()
+)

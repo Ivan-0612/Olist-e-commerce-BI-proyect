@@ -1,0 +1,161 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportExtension/1.0.0/schema.json",
+  "name": "extension",
+  "entities": [
+    {
+      "name": "gold_fact_orders",
+      "measures": [
+        {
+          "name": "Total Revenue",
+          "dataType": "Double",
+          "expression": "SUM(gold_fact_orders[sales_amount])",
+          "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+          "displayFolder": "01_Base Metrics"
+        },
+        {
+          "name": "Total Freight",
+          "dataType": "Double",
+          "expression": "SUM(gold_fact_orders[freight_amount])",
+          "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+          "displayFolder": "02_Logistics"
+        },
+        {
+          "name": "Total Orders",
+          "dataType": "Double",
+          "expression": "DISTINCTCOUNT(gold_fact_orders[order_id])",
+          "displayFolder": "01_Base Metrics"
+        },
+        {
+          "name": "Total Items Sold",
+          "dataType": "Double",
+          "expression": "COUNTROWS(gold_fact_orders)",
+          "displayFolder": "01_Base Metrics"
+        },
+        {
+          "name": "Average Order Value (AOV)",
+          "dataType": "Double",
+          "expression": "DIVIDE([Total Revenue],[Total Orders],0)",
+          "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+          "displayFolder": "01_Base Metrics",
+          "references": {
+            "measures": [
+              {
+                "schema": "extension",
+                "entity": "gold_fact_orders",
+                "name": "Total Revenue"
+              },
+              {
+                "schema": "extension",
+                "entity": "gold_fact_orders",
+                "name": "Total Orders"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Average Review Score",
+          "dataType": "Double",
+          "expression": "AVERAGE(gold_fact_orders[review_score])",
+          "displayFolder": "03_Products"
+        },
+        {
+          "name": "Average Delivery Days",
+          "dataType": "Double",
+          "expression": "AVERAGE(gold_fact_orders[delivery_days])",
+          "formatString": "0.00",
+          "displayFolder": "02_Logistics"
+        },
+        {
+          "name": "Revenue PY",
+          "dataType": "Double",
+          "expression": "\nCALCULATE(\n    [Total Revenue],\n    SAMEPERIODLASTYEAR(gold_dim_date[date_key])\n)",
+          "displayFolder": "05_Time Intelligence",
+          "references": {
+            "measures": [
+              {
+                "schema": "extension",
+                "entity": "gold_fact_orders",
+                "name": "Total Revenue"
+              }
+            ]
+          }
+        },
+        {
+          "name": "YoY Revenue Growth %",
+          "dataType": "Double",
+          "expression": "\nVAR _Current = [Total Revenue]\nVAR _Previous = [Revenue PY]\nRETURN\nIF(\n    NOT ISBLANK(_Current) && NOT ISBLANK(_Previous) && _Previous > 0,\n    DIVIDE(_Current - _Previous, _Previous),\n    BLANK()\n)",
+          "formatString": "0.00\\ %;-0.00\\ %;0.00\\ %",
+          "displayFolder": "05_Time Intelligence",
+          "references": {
+            "measures": [
+              {
+                "schema": "extension",
+                "entity": "gold_fact_orders",
+                "name": "Total Revenue"
+              },
+              {
+                "schema": "extension",
+                "entity": "gold_fact_orders",
+                "name": "Revenue PY"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Revenue YTD",
+          "dataType": "Double",
+          "expression": "\nTOTALYTD([Total Revenue], gold_dim_date[date_key])",
+          "displayFolder": "05_Time Intelligence",
+          "references": {
+            "measures": [
+              {
+                "schema": "extension",
+                "entity": "gold_fact_orders",
+                "name": "Total Revenue"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Freight Ratio %",
+          "dataType": "Double",
+          "expression": "DIVIDE([Total Freight], [Total Revenue], 0)",
+          "formatString": "0.00\\ %;-0.00\\ %;0.00\\ %",
+          "displayFolder": "02_Logistics",
+          "references": {
+            "measures": [
+              {
+                "schema": "extension",
+                "entity": "gold_fact_orders",
+                "name": "Total Freight"
+              },
+              {
+                "schema": "extension",
+                "entity": "gold_fact_orders",
+                "name": "Total Revenue"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Active Sellers",
+          "dataType": "Double",
+          "expression": "DISTINCTCOUNT(gold_fact_orders[seller_id])",
+          "displayFolder": "04_Sellers"
+        },
+        {
+          "name": "Catalog SKUs",
+          "dataType": "Double",
+          "expression": "DISTINCTCOUNT(gold_dim_products[product_id])",
+          "displayFolder": "03_Products"
+        },
+        {
+          "name": "Items per Order",
+          "dataType": "Double",
+          "expression": "\nDIVIDE(\n    COUNTROWS(gold_fact_orders), \n    DISTINCTCOUNT(gold_fact_orders[order_id]), \n    0\n)",
+          "displayFolder": "01_Base Metrics"
+        }
+      ]
+    }
+  ]
+}

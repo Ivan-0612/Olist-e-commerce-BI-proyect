@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "1629afac4c822602b618",
+  "displayName": "Logística",
+  "displayOption": "FitToPage",
+  "height": 1080,
+  "width": 1920,
+  "visualInteractions": [
+    {
+      "source": "40a23aa0269cb56480b3",
+      "target": "75022169d9d7bc580616",
+      "type": "NoFilter"
+    }
+  ]
+}

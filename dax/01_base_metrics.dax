@@ -1,0 +1,30 @@
+// 1. Facturación total 
+[Total Revenue] = 
+SUM(gold_fact_orders[sales_amount])
+
+
+// 2. Total de órdenes
+[Total Orders] = 
+DISTINCTCOUNT(gold_fact_orders[order_id])
+
+
+// 3. Ticket medio
+[Average Order Value (AOV)] = 
+DIVIDE(
+    [Total Revenue], 
+    [Total Orders], 
+    0
+)
+
+
+// 4. Cesta media
+[Items per Order] = 
+DIVIDE(
+    COUNTROWS(gold_fact_orders), 
+    [Total Orders], 
+    0
+)
+
+// 5. Unidades vendidas
+[Total Items Sold] =
+ COUNTROWS(gold_fact_orders)
